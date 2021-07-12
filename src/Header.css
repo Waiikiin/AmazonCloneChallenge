@@ -60,10 +60,15 @@
 .header_optionBasket {
   display: flex;
   align-items: center;
-  color: white;
+  color: white !important;
 }
 
 .header_basketCount {
   margin-left: 10px;
   margin-right: 10px;
+}
+
+#basketLinkTo {
+  margin-top: auto;
+  margin-bottom: auto;
 }
