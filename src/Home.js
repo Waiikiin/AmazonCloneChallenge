@@ -18,7 +18,12 @@ function Home(props) {
                     price={1499.99}
                     image="https://www.downloadclipart.net/large/gaming-computer-png-hd.png"
                     rating={4}/>
-                    <Product/>
+                    <Product 
+                    id= "1231234"
+                    title={"The ultimate gaming PC 2"} 
+                    price={1399.99}
+                    image="https://www.downloadclipart.net/large/gaming-computer-png-hd.png"
+                    rating={4}/>
                 </div>
 
                 <div className="home_row">
