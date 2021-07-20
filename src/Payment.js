@@ -27,7 +27,7 @@ function Payment() {
             const response = await axios ({
                 method: 'post',
                 // Stripe expects the total in a currencies subunits
-                url: `/payment/create?total=${getBasketTotal(basket)* 100}`
+                url: `/payments/create?total=${getBasketTotal(basket)* 100}`
             })
             setClientSecret(response.data.clientSecret)
         }
