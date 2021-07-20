@@ -52,6 +52,10 @@ function Payment() {
             setProcessing(false);
             setError(null);
 
+            dispatch({
+                type: 'EMPTY_BASKET'
+            })
+            
             history.replace('/orders')
         })
     }
