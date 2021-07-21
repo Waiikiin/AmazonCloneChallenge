@@ -2,11 +2,12 @@ import React from 'react'
 import './Header.css'
 import SearchIcon from '@material-ui/icons/Search'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useStateValue } from './StateProvider' 
 import { auth } from './firebase'
 
 function Header() {
+    const history = useHistory();
     const [ { basket, user }, dispatch] = useStateValue();
 
     const handleAuthentication = () => {
@@ -47,17 +48,19 @@ function Header() {
                     </div>
                 </Link>
 
-                <div className="header_nav_option">
-                    <span
-                        className="header_nav_optionLineOne">
-                        Returns
-                    </span>
+                <Link to={!user && "/login" }>
+                    <div onClick={e => {history.push("/orders")}} className="header_nav_option">
+                        <span
+                            className="header_nav_optionLineOne">
+                            Returns
+                        </span>
 
-                    <span
-                        className="header_nav_optionLineTwo">
-                        & Orders
-                    </span>
-                </div>
+                        <span
+                            className="header_nav_optionLineTwo">
+                            & Orders
+                        </span>
+                    </div>
+                </Link>
 
                 <div className="header_nav_option">
                     <span

@@ -3,7 +3,6 @@ import './Home.css'
 import Product from './Product'
 
 function Home(props) {
-    console.log("im home");
     return (
         <div className="home">
             <div className="home_container"> 

@@ -17,16 +17,16 @@ app.use(express.json());
 
 // - API routes
 app.get('/', (request, response) => response.status(200).send ('api test'))
-app.post('./payments/create', async (request, response) => {
+app.post('/payments/create', async (request, response) => {
     const total = request.query.total;
 
-    const paymentIntent = await stripe.paymentIntent.create({
+    const paymentIntents = await stripe.paymentIntents.create({
         amount: total,
         currency: "usd",
     })
     // 201 = created something and everything is good
     response.status(201).send({
-        clientSecret: paymentIntent.client_secret,
+        clientSecret: paymentIntents.client_secret,
     })
 })
 // - Listen command
