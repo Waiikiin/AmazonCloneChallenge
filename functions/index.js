@@ -16,7 +16,7 @@ app.use(cors({
 app.use(express.json());
 
 // - API routes
-app.get('/', (request, response) => response.status(200).send ('api test'))
+app.get('/', (request, response) => response.status(200).send('API test'))
 app.post('/payments/create', async (request, response) => {
     const total = request.query.total;
 

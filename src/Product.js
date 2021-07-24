@@ -1,16 +1,19 @@
 import React from 'react'
 import './Product.css'
+import Card from './Card.js'
 import { useStateValue } from './StateProvider'
+import nextId from "react-id-generator";
 
-function Product({id, title, image, price, rating}) {
+function Product({title, image, price, rating}) {
     const [{ basket }, dispatch] = useStateValue();
+    const newId = nextId();
 
     const addToBasket = () => {
         //dispatch item to data layer
         dispatch({
             type: 'ADD_TO_BASKET',
             item: {
-                id: id,
+                id: newId,
                 title: title,
                 image: image,
                 price: price,
@@ -19,31 +22,27 @@ function Product({id, title, image, price, rating}) {
         })
     }
 
+    const productRating =  (
+        <div style={{display: "flex", justifyContent: "center", padding: "10px"}}>
+            {Array(rating)
+                .fill()
+                .map((_, i) => (
+                    <p>⭐</p> 
+                ))}
+        </div> 
+    )
+
     return (
         <div className="product">
-            <img
-                src={image}
-                alt=""></img>
-             <div className="product_info">
-                <p>{title}</p>
-
-                <p className="product_price">
-                    <small>$</small>
-                    <strong>{price}</strong>
-                </p>
-
-                <div className="product_rating">
-                    {Array(rating)
-                        .fill()
-                        .map((_, i) => (
-                            <p>⭐</p> 
-                        ))}
-                    
-                </div>
-            </div>
-
-
-            <button onClick={addToBasket}>Add to Basket</button>
+            <Card
+                id={newId}
+                image={image}
+                action={addToBasket}
+                button={'Add to Cart'}
+                title={title}
+                description={'$' + price}
+                extra={productRating}
+            />
         </div>
     )
 }

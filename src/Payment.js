@@ -8,6 +8,7 @@ import CurrencyFormat from 'react-currency-format'
 import { getBasketTotal } from './reducer'
 import axios from './axios'
 import { db } from './firebase'
+import { motion, AnimatePresence} from 'framer-motion'
 
 function Payment() {
 
@@ -100,15 +101,25 @@ function Payment() {
                             <h3> Review items and <br />delivery </h3>
                         </div>
                         <div className="payment_items">
-                            {basket.map(item => (
-                                <CheckoutProduct
-                                    id={item.id}
-                                    title={item.title}
-                                    image={item.image}
-                                    rating={item.rating}
-                                    price={item.price}
-                                />
-                            ))}
+                        <AnimatePresence>     
+                                    {basket.map(item => (                                       
+                                        <motion.div
+                                            key={item.id}
+                                            initial={{ opacity: 0.2 }}
+                                            animate={{ opacity: 1 }}
+                                            exit={{ x: -200, opacity: 0 }}
+                                            transition={ { type: "spring", stiffness: 500, damping: 60, duration: 0.5 } }
+                                        >
+                                            <CheckoutProduct
+                                                id={item.id}
+                                                title={item.title}
+                                                image={item.image}
+                                                rating={item.rating}
+                                                price={item.price}
+                                            />
+                                        </motion.div>  
+                                    ))}
+                            </AnimatePresence>
                         </div>
                     </div>
 
