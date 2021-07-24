@@ -7,11 +7,14 @@
 .checkoutProduct_info {
   display: flex;
   flex-direction: column;
-  padding-left: 18px;
+  padding-left: 30px;
 }
 
 .checkoutProduct_image {
-  max-height: 180px;
+  max-height: 200px;
+  min-height: 200px;
+  min-width: 200px;
+  max-width: 200px;
   width: 180px;
   object-fit: contain;
 }
@@ -31,10 +34,11 @@
 }
 
 .checkoutProduct_info > button {
-  background: #e2c47f;
-  border: 2px solid;
+  background: #f0c13b;
+  border: 1px solid;
   margin-top: 10px;
-  border-color: #ad7f13;
+  border-color: #ad7f14;
+  max-width: 150px;
   /* border-color: #a88734 #9c7e31 #846a29;
   border: 1px solid;
   color: #111; */

@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
-import './App.css';
+import React, { useEffect } from 'react'
+import './App.css'
 import Home from './Home'
 import Header from './Header'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Checkout from './Checkout'
 import Login from './Login'
+import Orders from './Orders'
+import Payment from './Payment'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { auth } from './firebase'
 import { useStateValue } from './StateProvider'
-import Payment from './Payment'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 
@@ -21,7 +22,6 @@ function App() {
     auth.onAuthStateChanged(authUser => {
       if (authUser) {
         // the user just logged in / the user was logged in
-        console.log(authUser);
         dispatch({
           type: 'SET_USER',
           user: authUser
@@ -41,6 +41,11 @@ function App() {
    <Router> 
       <div className="App">
         <Switch>
+          <Route path="/orders">
+            <Header/>
+            <Orders/>
+          </Route>
+
           <Route path="/login">
             <Login/>
           </Route>
