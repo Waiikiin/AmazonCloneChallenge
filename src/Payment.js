@@ -10,6 +10,7 @@ import axios from './axios'
 import { db } from './firebase'
 
 function Payment() {
+
     const [{ basket, user }, dispatch] = useStateValue();
     const history = useHistory();
     const stripe = useStripe();
@@ -19,35 +20,27 @@ function Payment() {
     const [succeeded, setSucceeded ] = useState(false);
     const [processing, setProcessing ] = useState(false);
     const [disabled, setDisabled ] = useState(true);
-    const [clientSecret, setClientSecret] = useState(true);
-
-    // every time the component loads/cart items change, it calls this method
-    useEffect(() => {
-        //generate the special stripe secret which allows us to charge a customer
-        const getClientSecret = async () => {
-            const response = await axios ({
-                method: 'post',
-                // Stripe expects the total in a currencies subunits
-                url: `/payments/create?total=${getBasketTotal(basket)* 100}`
-            })
-            setClientSecret(response.data.clientSecret)
-        }
-        getClientSecret();
-    }, [basket])
 
     const handleSubmit = async event => {
         // stipe processing
         event.preventDefault();
         setProcessing(true);
+        
+        // get the client's secret from API
+        const response = await axios ({
+            method: 'post',
+            // Stripe expects the total in a currencies subunits
+            url: `/payments/create?total=${getBasketTotal(basket)* 100}`
 
-        const payload = await stripe.confirmCardPayment(clientSecret, {
-            payment_method: {
-                card: elements.getElement(CardElement)
-            }
-            
-        }).then(( {paymentIntent}) => {
+        }).then( async (response) => {
+            return await stripe.confirmCardPayment(response.data.clientSecret, {
+                payment_method: {
+                    card: elements.getElement(CardElement)
+                }
+            })
+        }).then(async ( {paymentIntent}) => {
             // paymentIntent = payment confirmation
-            db
+            await db
             .collection('users')
             .doc(user?.uid)
             .collection('orders')
@@ -56,7 +49,6 @@ function Payment() {
                 basket: basket,
                 amount: paymentIntent.amount,
                 created: paymentIntent.created,
-
             })
 
             setSucceeded(true);
@@ -68,11 +60,13 @@ function Payment() {
             })
             
             history.replace('/orders')
-        })
+        }).catch(err => {
+            console.log(err)
+        });
     }
+        
 
     const handleChange = event => {
-        // stipe processing
         setDisabled(event.empty);
         setError(event.error ? event.error.message : "");
     }
