@@ -49,4 +49,10 @@
   margin-top: 10px;
   border-color: #a88734 #9c7e31 #846a29;
   color: #111;
+  cursor: pointer;
+}
+
+.payment_details > form > div > button:disabled {
+  opacity: 0.3;
+  cursor: unset;
 }

@@ -1,7 +1,8 @@
-import React from 'react'
-import './Product.css'
-import Card from './Card.js'
-import { useStateValue } from './StateProvider'
+import React from 'react';
+import '../styles/Product.css';
+import Card from './Card.js';
+import { useStateValue } from '../utils/StateProvider';
+
 import nextId from "react-id-generator";
 
 function Product({title, image, price, rating}) {

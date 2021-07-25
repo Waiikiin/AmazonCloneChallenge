@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import './Orders.css'
-import Order from './Order'
-import { useStateValue } from './StateProvider'
-import { db } from './firebase';
-import  { Redirect } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import '../styles/Orders.css';
+import Order from '../components/Order';
+import { useStateValue } from '../utils/StateProvider';
+import { db } from '../utils/firebase';
+
+import  { Redirect } from 'react-router-dom';
 
 function Orders() {
     const [orders, setOrders] = useState([]);

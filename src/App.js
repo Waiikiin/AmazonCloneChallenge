@@ -1,22 +1,24 @@
-import React, { useEffect } from 'react'
-import './App.css'
-import Home from './Home'
-import Header from './Header'
-import Checkout from './Checkout'
-import Login from './Login'
-import Orders from './Orders'
-import Payment from './Payment'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { auth } from './firebase'
-import { useStateValue } from './StateProvider'
-import { loadStripe } from '@stripe/stripe-js'
-import { Elements } from '@stripe/react-stripe-js'
+import React, { useEffect } from 'react';
+import './styles/App.css';
+import Header from './components/Header';
+import Home from './pages/Home';
+import Checkout from './pages/Checkout';
+import Login from './pages/Login';
+import Orders from './pages/Orders';
+import Payment from './pages/Payment';
+import { auth } from './utils/firebase';
+import { useStateValue } from './utils/StateProvider';
+import stripe from './resources/stripe'
 
-const promise = loadStripe("pk_test_51JERAiKk8OJsN8HVssyOtf0d1L8BvFbhtY1Xd081IYkuGXxJDjcFJcVsPgfSq6tZdHiFYCLcT6aoEs2Etp2L4PlP00jxKWwCBQ");
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+
+const promise = loadStripe(stripe[0].secretKey);
 
 function App() {
   const [{}, dispatch] = useStateValue();
-
+  
   // will only run once when the app component loads
   useEffect(() => {
     auth.onAuthStateChanged(authUser => {
@@ -37,7 +39,6 @@ function App() {
   }, [])
 
   return (
-    //BEM
    <Router> 
       <div className="App">
         <Switch>
@@ -66,13 +67,10 @@ function App() {
             <Header />
             <Home />
           </Route>
-
-          {/* About */}
         </Switch>
-        
       </div>
     </Router>
-  );
+  )
 }
 
 export default App;

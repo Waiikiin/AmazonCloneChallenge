@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
+import './styles/index.css';
+import reducer, { initialState } from './utils/reducer';
+import { StateProvider } from './utils/StateProvider'
 import reportWebVitals from './reportWebVitals';
-import reducer, { initialState } from './reducer';
-import { StateProvider } from './StateProvider'
 
 ReactDOM.render(
   <React.StrictMode>
