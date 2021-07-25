@@ -19,10 +19,19 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm cache clean --force
-      - run: npm install
+      - run: npm ci
+      - run: |
+          cd functions
+          npm ci
       - run: npm run build --if-present
         env:
           CI: false
+      # deploy to cloud functions
+      - uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only functions
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
