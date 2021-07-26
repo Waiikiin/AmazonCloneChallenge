@@ -1,10 +1,11 @@
 import React from 'react'
-import './Header.css'
+import '../styles/Header.css'
+import { useStateValue } from '../utils/StateProvider' 
+import { auth } from '../utils/firebase'
+
+import { Link, useHistory } from 'react-router-dom'
 import SearchIcon from '@material-ui/icons/Search'
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket'
-import { Link, useHistory } from 'react-router-dom'
-import { useStateValue } from './StateProvider' 
-import { auth } from './firebase'
 
 function Header() {
     const history = useHistory();
@@ -48,8 +49,8 @@ function Header() {
                     </div>
                 </Link>
 
-                <Link to={!user && "/login" }>
-                    <div onClick={e => {history.push("/orders")}} className="header_nav_option">
+                <Link to={!user ? "/login" : "/orders"}>
+                    <div className="header_nav_option">
                         <span
                             className="header_nav_optionLineOne">
                             Returns

@@ -1,7 +1,8 @@
-import React from 'react'
-import './Order.css'
-import CheckoutProduct from './CheckoutProduct'
-import CurrencyFormat from 'react-currency-format'
+import React from 'react';
+import '../styles/Order.css';
+import CheckoutProduct from './CheckoutProduct';
+
+import CurrencyFormat from 'react-currency-format';
 import { DateTime } from "luxon";
 
 function Order({ order }) {

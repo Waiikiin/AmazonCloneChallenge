@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react'
-import './Payment.css'
-import { useStateValue } from './StateProvider'
-import CheckoutProduct from './CheckoutProduct'
-import { Link, useHistory, Redirect } from 'react-router-dom'
-import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js'
-import CurrencyFormat from 'react-currency-format'
-import { getBasketTotal } from './reducer'
-import axios from './axios'
-import { db } from './firebase'
-import { motion, AnimatePresence} from 'framer-motion'
+import React, { useState, useEffect } from 'react';
+import '../styles/Payment.css';
+import { useStateValue } from '../utils/StateProvider';
+import CheckoutProduct from '../components/CheckoutProduct';
+import { getBasketTotal } from '../utils/reducer';
+import axios from '../utils/axios';
+import { db } from '../utils/firebase';
+
+import { Link, useHistory, Redirect } from 'react-router-dom';
+import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import CurrencyFormat from 'react-currency-format';
+import { motion, AnimatePresence} from 'framer-motion';
 
 function Payment() {
 
@@ -17,21 +18,22 @@ function Payment() {
     const stripe = useStripe();
     const elements = useElements();
 
-    const [error, setError ] = useState(null);
-    const [succeeded, setSucceeded ] = useState(false);
-    const [processing, setProcessing ] = useState(false);
-    const [disabled, setDisabled ] = useState(true);
-
+    const [error, setError] = useState(null);
+    const [succeeded, setSucceeded] = useState(false);
+    const [processing, setProcessing] = useState(false);
+    const [disabled, setDisabled] = useState(true);
+   
     const handleSubmit = async event => {
         // stipe processing
         event.preventDefault();
         setProcessing(true);
         
+        var total = parseInt((getBasketTotal(basket) * 100).toFixed(2));
         // get the client's secret from API
         const response = await axios ({
             method: 'post',
             // Stripe expects the total in a currencies subunits
-            url: `/payments/create?total=${getBasketTotal(basket)* 100}`
+            url: `/payments/create?total=${total}`
 
         }).then( async (response) => {
             return await stripe.confirmCardPayment(response.data.clientSecret, {
@@ -62,13 +64,18 @@ function Payment() {
             
             history.replace('/orders')
         }).catch(err => {
-            console.log(err)
+            console.log(err);
+            setSucceeded(false);
+            setProcessing(false);
+            setDisabled(false);
+            setError(null);
+            alert("Unexpected error, Please try again");
         });
     }
         
 
     const handleChange = event => {
-        setDisabled(event.empty);
+        setDisabled(!event.complete);
         setError(event.error ? event.error.message : "");
     }
 
@@ -145,7 +152,7 @@ function Payment() {
                                         thousandSeparator={true}
                                         prefix={"$"}
                                     />
-                                    <button disabled={processing || disabled ||
+                                    <button disabled={ processing || disabled ||
                                     succeeded}>
                                         <span> {processing ? <p>Processing</p> 
                                         : "Buy Now"} </span>
