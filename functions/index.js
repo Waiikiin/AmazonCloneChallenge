@@ -2,8 +2,8 @@ const functions = require('firebase-functions');
 const express = require('express');
 const cors = require('cors');
 const { request, response } = require('express');
-const stripeConfig = require ('./resources/stripe')
-const stripe = require("stripe")(stripeConfig[0].secretKey);
+
+const stripe = require("stripe")(process.env.REACT_APP_STRIPE_API_KEY);
 
 // - App config 
 const app = express();

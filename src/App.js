@@ -14,7 +14,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 
-const promise = loadStripe(stripe[0].secretKey);
+const promise = loadStripe(process.env.REACT_APP_STRIPE_API_KEY);
 
 function App() {
   const [{}, dispatch] = useStateValue();
