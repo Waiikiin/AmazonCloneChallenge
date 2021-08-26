@@ -8,12 +8,13 @@ import Orders from './pages/Orders';
 import Payment from './pages/Payment';
 import { auth } from './utils/firebase';
 import { useStateValue } from './utils/StateProvider';
-import stripe from './resources/stripe'
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 
+import stripe from './resources/stripe'
+// const promise = loadStripe(process.env.REACT_APP_STRIPE_API_KEY);
 const promise = loadStripe(stripe[0].secretKey);
 
 function App() {
