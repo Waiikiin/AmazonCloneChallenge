@@ -43,12 +43,11 @@ This project was made to help me practice more about react, its reducer hook, an
 
 <!-- GETTING STARTED -->
 ## Getting Started
-
-checkout [Card Number for Testing](https://stripe.com/docs/testing) to see what to credit card numbers can be used for testing
 To see the project you can visit this link [AmazonClone](https://clone-93721.firebaseapp.com/) or you can set it up locally manually
 
-Below is an example of how you may set up your project locally.
-To get a local copy up and running follow these simple example steps.
+Checkout [Card Number for Testing](https://stripe.com/docs/testing) to see what to credit card numbers can be used for testing.
+
+To get a local copy up and running follow these simple example steps below.
 
 ### Prerequisites
 Make sure your Node.js is at least version 12 or above.
