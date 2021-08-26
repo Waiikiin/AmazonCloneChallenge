@@ -70,16 +70,14 @@ This is an example of how to list things you need to use the software and how to
    ```sh
    npm install
    ```
-4. Create a .env file in the root directory or modify the .env_template file name to .env 
-5. Enter your API in `.env`
-   ```JS
-   REACT_APP_STRIPE_API_KEY = ENTER YOUR STRIPE API;
-   ```
-
+4. Run
+    ```JS
+    npm start
+    ```
 <!-- CONTACT -->
 ## Contact
 
-LinkedIn - [https://www.linkedin.com/in/wai-kin-leong-8a4a51170/](linkedIn) 
+LinkedIn - [https://www.linkedin.com/in/wai-kin-leong-8a4a51170](https://www.linkedin.com/in/wai-kin-leong-8a4a51170) 
 
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
