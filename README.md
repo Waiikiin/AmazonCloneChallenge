@@ -32,6 +32,7 @@ This project was made to help me practice more about react, its reducer hook, an
 
 ### Built With
 * [React](https://reactjs.org/)
+* [React-content-loader](https://github.com/danilowoz/react-content-loader)
 * [Styled Components](https://styled-components.com/)
 * [Stripe](https://stripe.com/en-ca)
 * [Luxon](https://moment.github.io/luxon/#/)
